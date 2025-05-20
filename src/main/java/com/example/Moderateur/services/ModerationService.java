@@ -21,6 +21,9 @@ public class ModerationService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PerspectiveService perspectiveService;
+
 
     @Autowired
     private ModerateurRepository moderateurRepository;
@@ -41,8 +44,10 @@ public class ModerationService {
     }
 
     public void handleReportedComment(ReportedComment comment) {
-        if (containsProhibitedContent(comment.getText())) {
-            // Appel au service commentaire pour supprimer ou masquer
+
+        double score = perspectiveService.analyzeToxicity(comment.getText());
+        if (score >= 0.75) {
+            System.out.println("Prohibited content");
         }
     }
 

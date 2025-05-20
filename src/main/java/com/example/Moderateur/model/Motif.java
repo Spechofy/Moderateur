@@ -4,8 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.*;
 
 @Entity(name = "motif")
+@Getter
+@Setter
 public class Motif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +24,5 @@ public class Motif {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public void setUserId(Long userId) {
-    }
-
-    public void setMotif(String motif) {
-
-    }
 }
 

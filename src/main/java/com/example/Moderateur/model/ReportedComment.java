@@ -1,5 +1,10 @@
 package com.example.Moderateur.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ReportedComment {
     private Long commentId;
     private String text;
