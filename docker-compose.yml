@@ -1,6 +1,21 @@
 version: '3.8'
 
+
+
 services:
+  moderateur-service:
+    build: .
+    container_name: moderateur-service
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://moderateur-db:5432/moddb
+      - SPRING_DATASOURCE_USERNAME=moderateur
+      - SPRING_DATASOURCE_PASSWORD=modpass
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - moderateur-db
+      -
   postgres:
     image: postgres
     container_name: db_moderateur
@@ -16,3 +31,10 @@ services:
 
 volumes:
   pgdata:
+
+
+
+
+
+
+
