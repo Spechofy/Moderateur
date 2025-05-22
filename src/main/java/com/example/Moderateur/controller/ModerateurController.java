@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/moderateurs")
 public class ModerateurController {
@@ -14,13 +16,26 @@ public class ModerateurController {
     private ModerateurService moderateurService;
 
     @PostMapping
-    public ResponseEntity<Moderateur> createModerateur(@RequestBody Moderateur moderateur) {
-        return ResponseEntity.ok(moderateurService.saveModerateur(moderateur));
+    public ResponseEntity<Moderateur> create(@RequestBody Moderateur moderateur) {
+        return ResponseEntity.ok(moderateurService.create(moderateur));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Moderateur>> getAll() {
+        return ResponseEntity.ok(moderateurService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Moderateur> getById(@PathVariable String id) {
+        return moderateurService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteModerateur(@PathVariable Long id) {
-        moderateurService.deleteModerateur(id);
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        moderateurService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
+

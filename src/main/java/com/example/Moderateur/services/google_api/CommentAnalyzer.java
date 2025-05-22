@@ -1,4 +1,4 @@
-package com.example.Moderateur.services;
+package com.example.Moderateur.services.google_api;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class PerspectiveService {
+public class CommentAnalyzer {
 
     @Value("${google.perspective.api.key}")
     private String apiKey;

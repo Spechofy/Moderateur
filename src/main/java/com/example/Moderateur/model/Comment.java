@@ -1,20 +1,17 @@
 package com.example.Moderateur.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Entity(name = "users")
 @Getter
 @Setter
-public class User {
+@Entity(name = "comments")
+public class Comment {
     @Id
+    private Long Id;
     private Long userId;
-    private LocalDateTime birthday;
+    private String content;
 
 }
