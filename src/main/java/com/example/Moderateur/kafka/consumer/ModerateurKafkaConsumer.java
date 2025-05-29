@@ -9,18 +9,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Moderateur kafka consumer.
+ */
 @Service
 public class ModerateurKafkaConsumer {
     @Autowired
     private ModerateurRepository moderateurRepository;
 
 
-    @KafkaListener(topics = Topics.MODERATEUR, groupId = "spechofy-group")
+    /**
+     * Consume moderateur.
+     *
+     * @param event the event
+     */
+    @KafkaListener(
+            topics = Topics.MODERATEUR,
+            groupId = "moderateur-group",
+            containerFactory = "moderateurKafkaListenerFactory"
+    )
     public void consumeModerateur(ModerateurKafkaEvent event) {
         Action action = event.getAction();
         Moderateur moderateur = event.getData();
         switch (action) {
             case CREATE: moderateurRepository.save(moderateur); break;
+            case UPDATE: moderateurRepository.save(moderateur); break;
+            case DELETE: moderateurRepository.delete(moderateur); break;
+            default: break;
         }
     }
 }

@@ -9,20 +9,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Comment analyzer.
+ */
 @Service
 public class CommentAnalyzer {
 
-    @Value("${google.perspective.api.key}")
-    private String apiKey;
+
+   // @Value("${google.perspective.api.key}")
+    private final String apiKey = "AIzaSyBhtQ9wTIOLFf4yowpsdWcinbhShPSVN4k";
+
+    /**
+     * The constant MIN_TOXICITY.
+     */
+    public static final double MIN_TOXICITY = 0.5;
 
     private static final String API_URL = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=";
 
+    /**
+     * Analyze toxicity double.
+     *
+     * @param text the text
+     * @return the double
+     */
     public double analyzeToxicity(String text) {
+        String url = API_URL + apiKey;
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, Object> request = new HashMap<>();
         request.put("comment", Map.of("text", text));
-        request.put("languages", List.of("en")); // ou "fr" si dispo
+        request.put("languages", List.of("fr")); // ou "fr" si dispo
         request.put("requestedAttributes", Map.of("TOXICITY", new HashMap<>()));
 
         HttpHeaders headers = new HttpHeaders();

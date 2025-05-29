@@ -7,11 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "comments")
+@Entity(name = "/api/comments")
 public class Comment {
     @Id
-    private Long Id;
-    private Long userId;
+    private String id;
+    private String userId;
     private String content;
 
 }

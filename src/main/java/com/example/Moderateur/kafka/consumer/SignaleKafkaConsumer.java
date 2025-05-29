@@ -9,18 +9,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Signale kafka consumer.
+ */
 @Service
 public class SignaleKafkaConsumer {
     @Autowired
     private SignaleRepository signaleRepository;
 
 
-    @KafkaListener(topics = Topics.SIGNALE, groupId = "spechofy-group")
+    /**
+     * Consume signale.
+     *
+     * @param event the event
+     */
+    @KafkaListener(
+            topics = Topics.SIGNALE,
+            groupId = "moderateur-group",
+            containerFactory = "signaleKafkaListenerFactory"
+    )
     public void consumeSignale(SignaleKafkaEvent event) {
         Action action = event.getAction();
         Signale signale = event.getData();
         switch (action) {
             case CREATE: signaleRepository.save(signale); break;
+            case DELETE: signaleRepository.delete(signale); break;
+            case UPDATE: signaleRepository.save(signale); break;
+            default: break;
         }
     }
 }
