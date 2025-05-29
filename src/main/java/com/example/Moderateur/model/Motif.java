@@ -7,12 +7,14 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity(name = "motif")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Motif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String label;
 
 

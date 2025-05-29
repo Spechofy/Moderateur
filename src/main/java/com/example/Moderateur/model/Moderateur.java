@@ -1,8 +1,6 @@
 package com.example.Moderateur.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class Moderateur {
     @Id
-    private Long userId;
+    private String userId;
 
-    private Long ProfileId;
+    private String profileId;
 }
